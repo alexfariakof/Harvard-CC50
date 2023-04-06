@@ -9,12 +9,12 @@ Curso de introdução a Computer science da Harvard.  A intenção é fazer uma 
 #Instalação do chocolatey 
 </h2>
 <h4>
-    <a href="https://chocolatey.org/install">chocolatey</a>
+ Siga  as instruções do site  <a href="https://chocolatey.org/install">chocolatey</a>
 </h4>
 <h2>
 
 #Instalação do C/C++
 </h2>
 <h4>
-execute oseguinte comando no powershell ou cmd "choco install mingw"
+Execute o seguinte comando no powershell ou cmd "choco install mingw"
 </h4>
