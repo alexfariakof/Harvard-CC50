@@ -1,0 +1,120 @@
+* {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+body {
+    padding-top: 50px;
+}
+
+section {
+    padding-top: 25px;
+    padding-bottom: 15px;
+    min-height: 100vh;
+}
+
+section#contato {
+    min-height: 80vh;   
+}
+
+footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: url(../imgs/bgslider.png); 
+}
+
+img.grayscale {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+}
+
+img.grayscale:hover {
+  filter: none;
+  -webkit-filter: grayscale(0%);
+}
+
+.navbar-brand {
+   font-weight: 700; 
+}  
+
+.divslider {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: url(../imgs/bgslider.png);
+}
+
+.div_colorida {
+    background: url(../imgs/bgslider.png);
+}
+
+.servicos_item * {
+    text-align: center;
+}
+
+.servicos_item h4 {
+    margin-top: 30px;  
+    font-size: 25px;
+}
+
+.servicos_btn_todososservicos {
+    margin-top: 25px;   
+}
+
+.portfolio_item {
+    background: white;   
+}
+
+.portfolio_row {
+    margin-bottom: 20px;   
+}
+
+.portfolio_row:last-child {
+    margin-bottom: 0px;   
+}
+
+.portfolio_item h4 {
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.contato textarea {
+    height: 170px;   
+}
+
+.contato .aviso {
+   padding: 15px; 
+}  
+
+.section_interna {
+    padding-top: 0px;   
+}
+
+.form-login {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 10px;
+    background: #eee;
+}
+
+.form-login input {
+    margin-bottom: 10px;   
+}
+
+.panel {
+    margin-bottom: 2px;   
+}
+
+.conteudo_painel {
+    background: white;   
+    border-radius:8px;
+    border:1px solid #eee;
+    box-shadow: 2px 2px 5px #888;
+}
+
+.conteudo_painel_int {
+    padding: 12px;   
+}
