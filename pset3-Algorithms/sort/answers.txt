@@ -1,0 +1,12 @@
+
+How do you know?: Seu tempo de execução sempre aumenta de acordo com o tamanho da entrada, não mantendo um tempo de execução mais regular em comparação aos demais algoritimos.
+
+sort2 uses: Merge
+
+How do you know?: É um Theta(n log n), pois seu tempo de execução é inferior ao tempo de execução do sort3 que é um selection sort
+
+sort3 uses: Selection
+
+How do you know?: É um Theta(n²), Pois realizando comparações do tempo de execução foi identificado que o tempo de execução era sempre maior os algoritimos.
+
+//check50 cs50/labs/2023/x/sort
