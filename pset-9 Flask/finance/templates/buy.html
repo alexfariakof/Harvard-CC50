@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Quoute
+{% endblock %}
+
+{% block main %}
+<form action="/buy" method="post">
+    <input autocomplete="off" autofocus name="symbol" placeholder="symbol" type="text"  />
+    <input autocomplete="off" autofocus name="shares" placeholder="shares" type="number" min="1" max="100"  />
+    <button type="submit">Lookup</button>
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TODO: Loop through the database entries to display them in this table -->
+                <tr>
+                    <td>NFLX</td>
+                    <td>Netflix Inc.</td>
+                    <td>1</td>
+                    <td>$260.79</td>
+                    <td>$260,79</td>
+                    <td><button class="btn_buy" type="submit">Buy</button></td>
+                </tr>
+
+                {% for quote in QOUTES %}
+                <tr>
+                    <td>{{ quote["symbol"] }}</td>
+                    <td>{{ quote["name"] }}</td>
+                    <td>1</td>
+                    <td>{{ quote["price"] }}</td>
+                    <td>{{ quote["price"]*1 }}</td>
+                    <td><button class="btn_buy" type="submit">Buy</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="qoute_tfoot_td">Cash</th>
+                    <td>$9,739.21</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="qoute_tfoot_td">Total</th>
+                    <td>$10,000.00</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</form>
+{% endblock %}

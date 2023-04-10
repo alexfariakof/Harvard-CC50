@@ -1,7 +1,7 @@
-/*escreva uma consulta SQL para determinar o número de filmes com uma classificação IMDb de 10,0.
-Sua consulta deve gerar uma tabela com uma única coluna e uma única linha (sem incluir o cabeçalho)
- contendo o número de filmes com uma classificação de 10,0.
- SELECT * FROM sqlite_master WHERE type='table';
- */
+/* escreva uma consulta SQL para listar os títulos e anos de lançamento de todos os filmes de Harry Potter,
+ em ordem cronológica. Sua consulta deve gerar uma tabela com duas colunas, uma para o título de cada filme
+ e outra para o ano de lançamento de cada filme.
+Você pode presumir que o título de todos os filmes de Harry Potter começará com as palavras “Harry Potter”
+e que se o título de um filme começar com as palavras “Harry Potter”, é um filme de Harry Potter.*/
 
- Select count(*) From  ratings where rating = 10;
+Select title, year From movies where title like '%Harry%Potter%' order by year;

@@ -15,10 +15,13 @@ classificação de cada filme.
 Filmes sem classificação não devem ser incluídos no resultado.
 */
 
-Select count(1)
-  from movies m
- inner join ratings r on m.id = r.movie_id
- where m.year = 2010
 
---Select m.title, r.rating From movies m left join ratings r on m.id = r.movie_id  where year = 2010 and r.rating is not null  order by m.title desc;
+Select m.title, r.rating
+  From (Select id, title, year from movies order by title asc) m
+  inner join ratings r on m.id = r.movie_id
+ where year = 2010
+   and r.rating is not null
+order by r.rating desc;
+
+
 

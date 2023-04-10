@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+
+    <script>
+
+        function turnred(event) {
+            var trigger = event.srcElement;
+            trigger.style.backgroundColor = 'red';
+            document.querySelector("#multi").innerHTML = "Incorrect!";
+        };
+
+        function turngreen(event) {
+            var trigger = event.srcElement;
+            trigger.style.backgroundColor = 'green';
+            document.querySelector("#multi").innerHTML = "Correct!";
+        };
+    </script>
+
+</head>
+
+<body>
+
+    <div class="jumbotron">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+
+            <h3>How many jobs has Mat applied for?</h3>
+            <p id="multi"> </p>
+
+            <button id="none" onclick="turnred(event);"> None </button>
+            <button id="some" onclick="turnred(event);"> 1 to 10 </button>
+            <button id="lots" onclick="turngreen(event);">More than 10</button>
+
+        </div>
+
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <h3>What should Mat do with his life?</h3>
+            <input autocomplete="off" autofocus placeholder="Your idea?" id="answer" type="text">
+            <button id="confirm"> Check Answer </button>
+            <p id="feedback"> </p>
+
+            <script>
+                document.querySelector('#confirm').addEventListener('click', function () {
+                    let input = document.querySelector('#answer');
+                    if (input.value === "nothing") {
+                        input.style.backgroundColor = 'green';
+                        document.querySelector('#feedback').innerHTML = "Correct!"
+                    } else {
+                        input.style.backgroundColor = 'red';
+                        document.querySelector('#feedback').innerHTML = "Incorrect!"
+                    }
+                });
+
+            </script>
+        </div>
+
+    </div>
+</body>
+
+</html>

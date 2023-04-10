@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quouted
+{% endblock %}
+
+{% block main %}
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for quote in qoutes %}
+                <tr>
+                    <td>{{ quote.symbol }}</td>
+                    <td>{{ quote.name }}</td>
+                    <td>1</td>
+                    <td>{{ quote.price }}</td>
+                    <td>{{ quote.price*1 }}</td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="qoute_tfoot_td">Cash</th>
+                    <td>$9,739.21</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="qoute_tfoot_td">Total</th>
+                    <td>$10,000.00</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

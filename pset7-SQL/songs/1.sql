@@ -1,5 +1,5 @@
--- sqlite3 songs.db
---.schema
+-- sqlite3 roster.db
+-- .schema
 -- check50 cs50/labs/2023/x/songs
 -- submit50 cs50/labs/2023/x/songs
 

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        {% include "register.js" %}
+    </script>
+    <!-- The contents of myscript.js will be loaded inside the script tag -->
+{% endblock %}
+
+{% block title %}
+    Categorias
+{% endblock %}
+{% block header %}
+<div>
+    <button id="btnIncluirCategoria" onclick="handleIncluirCategoria" class="btn btn-primary" >Incluir</button>
+    <button id="btnAlterarCategoria" onclick="handleAlterarCategoria()" class="btn btn-primary" >Alterar</button>
+    <button id="btnExcluirCategoria" onclick="handleExcluirCategoria()" class="btn btn-primary" >Excluir </button>
+    <button id="btnVoltarCategoria"  onclick="history.back()"       class="btn btn-primary" >Voltar </button>
+</div>
+{% endblock %}
+{% block main %}
+{% endblock %}
+
+
+
+
+
