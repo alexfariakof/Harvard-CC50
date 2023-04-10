@@ -10,57 +10,24 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Symbol</th>
-                        <th>Name</th>
-                        <th>Shares</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                        <th></th>
+                        <th align='center' width="100vw" >Ações</th>
+                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>        
                     </tr>
                 </thead>
                 <tbody>
                     <!-- TODO: Loop through the database entries to display them in this table -->
                     <tr>
+                        <td><button class="btn_buy" disabled type="submit"><img src="/static/img/edit.png"/> </button></td>
                         <td>NFLX</td>
                         <td>Netflix Inc.</td>
                         <td>1</td>
                         <td>$260.79</td>
                         <td>$260,79</td>
-                        <td><button class="btn_buy" disabled type="submit">Buy</button></td>
                     </tr>
-                    <tr>
-                        <td>NFLX</td>
-                        <td>Netflix Inc.</td>
-                        <td>1</td>
-                        <td>$260.79</td>
-                        <td>$260,79</td>
-                        <td><button class="btn_sell" disabled type="submit">Sell</button></td>
-                    </tr>
-                    <tr>
-                        <td>NFLX</td>
-                        <td>Netflix Inc.</td>
-                        <td>1</td>
-                        <td>$260.79</td>
-                        <td>$260,79</td>
-                        <td><button class="btn_sell" disabled type="submit">Sell</button></td>
-                    </tr>
-                    <tr>
-                        <td>NFLX</td>
-                        <td>Netflix Inc.</td>
-                        <td>1</td>
-                        <td>$260.79</td>
-                        <td>$260,79</td>
-                        <td><button class="btn_buy" disabled type="submit">Buy</button></td>
-                    </tr>
-                    <tr>
-                        <td>NFLX</td>
-                        <td>Netflix Inc.</td>
-                        <td>1</td>
-                        <td>$260.79</td>
-                        <td>$260,79</td>
-                        <td><button class="btn_sell" disabled type="submit">Sell</button></td>
-                    </tr>
-
                 {% for quote in QOUTES %}
                     <tr>
                         <td>{{ quote["symbol"] }}</td>
