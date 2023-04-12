@@ -1,7 +1,7 @@
 /* Size for brand */
 nav .navbar-brand
 {
-    font-size: xx-large;
+    font-size: xx-large;    
 }
 
 /* Colors for brand */
@@ -46,6 +46,9 @@ nav .navbar-brand .green
     padding-top: 0.2rem;
     text-align: left;
     width: 100%;
+align-items: center;
+
+;
 }
 
 .formSection{
@@ -152,7 +155,7 @@ label{
 input[type="text"], input[type="number"], input[type="date"], .custom-select {
     line-height: 1.8;
     width: 100%;
-    border-radius: 0.65rem;
+    border-radius: 0.25rem;
     font-size: medium;
 }
 

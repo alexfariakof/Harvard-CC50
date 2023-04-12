@@ -6,6 +6,24 @@
 '
 {% block header %}
 <script type="text/javascript" src="/static/js/lancamentos.js"></script>
+<nav class="bg-light border navbar navbar-expand-md navbar-light">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbar">
+            <input type="number" id="mes" name="mes" min="1" max="12" autocomplete="off" autofocus  placeholder="Mês" style="width:4%;height:2.5rem;vertical-align:bottom;margin-left: 0.5rem;Text-align:center;margin-top:0.4rem;"  />
+            <input type="number" id="ano" name="ano" min="2018" max="2050" autocomplete="off" autofocus  placeholder="Ano" style="width:5%;height:2.5rem;vertical-align:bottom;margin-left: 0.5rem;Text-align:center;margin-top:0.4rem;" />
+            <ul class="navbar-nav me-auto mt-2">
+                <button id="btnPesquisar" onclick="handlePesquisar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Pesquisar lançamentos por mês e ano"
+                    class="btn btn-primary btnBarraFerramenta"><img class="iconImg" src="/static/img/lupa.png" />
+                     Pesquisar</button>
+            </ul>
+            <button id="btnConsolidar" onclick="handleConcolidar()" class="btn btn-primary btnBarraFerramenta" data-bs-toggle="tooltip" data-bs-placement="top" title="Após a consolidação não será possivél alterar recitas ou despesas." >
+             <img class="iconImg" src="/static/img/consolidar.png" /> Consolidar</button>
+             
+            </ul>
+        </div>
+    </div>
+</nav>
+
 {% endblock %}
 
 {% block main %}
@@ -14,6 +32,20 @@
     <div class="section">
         <table>
             <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    {% if total < 0 %}
+                        <th class="qoute_tfoot_td" style="font-size: 2rem;color:red;">Saldo</th>
+                        <td style="font-size: 1rem;color:red;">R$ {{ total }}</td>
+                    {% else %}
+                        <th class="qoute_tfoot_td" style="font-size: 2rem;color:green;">Saldo</th>
+                        <td style="font-size: 1rem;color:green;">R$ {{ total }}</td>
+                    {% endif%}
+                </tr>
                 <tr>
                     <th colspan="2"
                         style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">
@@ -41,17 +73,6 @@
                 </tr>
                 {% endfor %}
             </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <th class="qoute_tfoot_td" style="font-size: 2rem;">Total</th>
-                    <td>R$ {{ total }}</td>
-            </tr>
-            </tfoot>
         </table>
 </form>
 </div>
