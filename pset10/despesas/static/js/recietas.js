@@ -1,5 +1,5 @@
 
-var handleSaveReceita = function() {
+var handleSaveReceita = function(id) {
     alert('Todo Salvar Receita');
 }
 
@@ -11,8 +11,16 @@ var handleNewReceita = function() {
     document.querySelector('#data').focus()
 }
 
-var handleListReceita = function(){
+var handleListReceita = function() {
     var doc = document.querySelector('form');
     doc.action = "/receitasList";
     doc.submit();
+}
+
+var handleEdit = function(id) {    
+    alert('Todo Receita handleEdit ida = ' + id);
+}
+
+var handleDelete = function(id) {
+    alert('Todo Receita handleDelete id = ' + id);
 }

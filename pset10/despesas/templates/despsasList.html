@@ -31,18 +31,22 @@
                     <th>Tipo</th>
                     <th>Descrição</th>
                     <th>Categoria</th>
-                    <th></th>
+                    <th>Data Vencimento</th>                    
+                    <th>Valor</th>
                 </tr>
             </thead>
             <tbody>
                 {% for despesa in dados %}
                 <tr>
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" onclick="handleDelete({{ despesa.id}})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" onclick="handleEdit({{ despesa.id }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                        onclick="handleDelete({{ despesa.id }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                        onclick="handleEdit({{ despesa.id }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
                     <td>{{ despesa.data }}</td>
                     <td>{{ despesa.tipo }}</td>
                     <td> {{ despesa.descricao }}</td>
                     <td>{{ despesa.categoria }}</td>
+                    <td>{{ despesa.dataVencimento }}</td>                    
                     <td>R$ {{ despesa.valor }}</td>
                 </tr>
                 {% endfor %}

@@ -10,5 +10,17 @@ var handleNewCategoria = function() {
 }
 
 var handleListCategoria = function(){
-    alert('Todo Listar Categoria')
+    var doc = document.querySelector('form');
+    doc.action = "/categorias";
+    doc.method = "POST";
+    doc.submit();
 }
+
+var handleEdit = function(id){    
+    alert('Todo Categoria handleEdit ida = ' + id);
+}
+
+var handleDelete = function (id){
+    alert('Todo Categoria handleDelete id = ' + id);
+}
+

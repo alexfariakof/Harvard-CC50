@@ -124,7 +124,12 @@ def logout():
 @app.route("/categorias", methods=["GET", "POST"])
 @login_required
 def categorias():
-    return render_template("categorias.html")
+    
+    sql = "Select c.id, tc.descricao as tipo, c.descricao From Categoria c Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id where c.idUsuario = ?;"    
+    
+    dados = db.execute(sql, session["user_id"])        
+    
+    return render_template("categorias.html", dados= dados)
 
 @app.route("/tipoCategoria", methods=["GET", "POST"])
 @login_required
@@ -141,12 +146,11 @@ def despesas():
 @login_required
 def despsasList():
     
-        sql =   "Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, d.data, d.descricao, d.valor  From Despesa d Inner Join Categoria c on d.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where d.idUsuario = ?;"
-        print(sql)
-        dados = db.execute(sql, session["user_id"])
-        print(dados)
+    sql =   "Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, d.data, d.descricao, d.dataVencimento, d.valor  From Despesa d Inner Join Categoria c on d.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where d.idUsuario = ?;"
+
+    dados = db.execute(sql, session["user_id"])
         
-        return render_template("despsasList.html", dados=dados)
+    return render_template("despsasList.html", dados=dados)
 
 @app.route("/receitas", methods=["GET", "POST"])
 @login_required
@@ -156,12 +160,17 @@ def receitas():
 @app.route("/receitasList", methods=["GET", "POST"])
 @login_required
 def receitasList():
-    return render_template("receitasList.html")
+    sql =   "Select r.id, r.idUsuario, r.descricao as categoria, tc.descricao as tipo, r.data, r.descricao, r.valor  From Receita r Inner Join Categoria c on r.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where r.idUsuario = ?;"
+
+    dados = db.execute(sql, session["user_id"])
+
+    return render_template("receitasList.html", dados=dados )
 
 @app.route("/lancamentos", methods=["GET", "POST"])
 @login_required
 def lancamentos():
 
     dados = db.execute("Select * from lancamentos where idUsuario = ? ;", session["user_id"])
+
     return render_template('lancamentos.html', dados=dados)
 

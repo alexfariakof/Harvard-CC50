@@ -1,5 +1,5 @@
 
-var handleSaveDespesa = function() {
+var handleSaveDespesa = function(id) {
     alert('Todo Salvar Despesa');
 }
 
@@ -16,5 +16,14 @@ var handleListDespesa = function(){
     var doc = document.querySelector('form');
     doc.action = "/despsasList";
     doc.submit();
+}
+
+
+var handleEdit = function(id){    
+        alert('Todo Despesa handleEdit ida = ' + id);
+}
+
+var handleDelete = function (id){
+        alert('Todo Despesa handleDelete id = ' + id);
 }
 
