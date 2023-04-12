@@ -172,5 +172,7 @@ def lancamentos():
 
     dados = db.execute("Select * from lancamentos where idUsuario = ? ;", session["user_id"])
 
-    return render_template('lancamentos.html', dados=dados)
-
+    total = db.execute("Select sum(valor)as total from lancamentos where idUsuario = ? ;", session["user_id"])
+    total = total[0]
+    total = round(total['total'], 3 )
+    return render_template('lancamentos.html', dados=dados, total=total)
