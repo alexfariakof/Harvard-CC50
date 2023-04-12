@@ -29,9 +29,9 @@
              
                 {%  for lancamento in dados  %}
                 <tr>
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar {{ lancamento.tipo }}"
                             onclick="handleDelete({{ lancamento.id }}, {{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar {{ lancamento.tipo }}"
                             onclick="handleEdit({{ lancamento.id }}, {{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
                     <td>{{ lancamento.fData }}</td>
                     <td>{{ lancamento.tipo }}</td>

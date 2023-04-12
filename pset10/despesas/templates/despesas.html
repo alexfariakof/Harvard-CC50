@@ -9,14 +9,14 @@ Despesas
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mt-2">
-                <button id="btnSaveDespesa" onclick="handleSaveDespesa()"
+                <button id="btnSaveDespesa" onclick="handleSaveDespesa()" data-bs-toggle="tooltip" data-bs-placement="top" title="Salvar despesa"
                     class="btn btn-primary btnBarraFerramenta"><img class="iconImg" src="/static/img/diskette.png" />
                     Salvar</button>
-                <button id="btnNewDespesa" onclick="handleNewDespesa()"
+                <button id="btnNewDespesa" onclick="handleNewDespesa()" data-bs-toggle="tooltip" data-bs-placement="top" title="Crirar uma nova despesa"
                     class="btn btn-primary btnBarraFerramenta"><img class="iconImg" src="/static/img/plus.png" />
                     Novo</button>
-                <button id="btnListDespesa" onclick="handleListDespesa()" class="btn btn-primary btnBarraFerramenta"><img
-                     class="iconImg" src="/static/img/list.png" /> Listar</button>
+                <button id="btnListDespesa" onclick="handleListDespesa()" class="btn btn-primary btnBarraFerramenta" data-bs-toggle="tooltip" data-bs-placement="top" title="Listar despesas"
+                ><img class="iconImg" src="/static/img/list.png" /> Listar</button>
             </ul>
             <ul class="navbar-nav ms-auto mt-2">
                 <button id="btnVoltarDespesas" onclick="history.back()" class="btn btn-primary"><img class="iconImg"

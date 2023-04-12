@@ -38,9 +38,9 @@
             <tbody>
                 {% for despesa in dados %}
                 <tr>
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar despesa"
                         onclick="handleDelete({{ despesa.id }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar despesa"
                         onclick="handleEdit({{ despesa.id }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
                     <td>{{ despesa.data }}</td>
                     <td>{{ despesa.tipo }}</td>
