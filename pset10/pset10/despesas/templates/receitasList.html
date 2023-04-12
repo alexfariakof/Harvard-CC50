@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Lista de Despesas
+{% endblock %}
+
+{% block header %}
+<script type="text/javascript" src="/static/js/receitas.js"></script>
+<nav class="bg-light border navbar navbar-expand-md navbar-light">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mt-2">
+            </ul>
+            <ul class="navbar-nav ms-auto mt-2">
+                <button id="btnVoltarReceita" onclick="history.back()" class="btn btn-primary"><img class="iconImg"
+                        src="/static/img/voltar.png" /> Voltar </button>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block main %}
+<form action="/receitasList" method="post">
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2" style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">Ações</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TODO: Loop through the database entries to display them in this table -->
+                <tr>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleEdit(1)"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleDelete(1)"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                    <td>NFLX</td>
+                    <td>Netflix Inc.</td>
+                    <td>1</td>
+                    <td>$260.79</td>
+                    <td>$260,79</td>
+                </tr>
+                <tr>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleEdit(2)"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleDelete(2)"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                    <td>NFLX</td>
+                    <td>Netflix Inc.</td>
+                    <td>1</td>
+                    <td>$260.79</td>
+                    <td>$260,79</td>
+                </tr>
+                <tr>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleEdit(3)"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleDelete(3)"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                    <td>NFLX</td>
+                    <td>Netflix Inc.</td>
+                    <td>1</td>
+                    <td>$260.79</td>
+                    <td>$260,79</td>
+                </tr>
+                {% for quote in QOUTES %}
+                <tr>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleEdit(4)"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleDelete(4)"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                    <td>{{ quote["symbol"] }}</td>
+                    <td>{{ quote["name"] }}</td>
+                    <td>1</td>
+                    <td>{{ quote["price"] }}</td>
+                    <td>{{ quote["price"]*1 }}</td>
+                    <td><button class="btn_buy" type="submit">Buy</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th class="qoute_tfoot_td" style="font-size: 2rem;">Total</th>
+                <td>$10,000.00</td>
+            </tr>
+            </tfoot>
+        </table>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Lista de Despesas
+{% endblock %}
+
+{% block header %}
+<script type="text/javascript" src="/static/js/despesas.js"></script>
+<nav class="bg-light border navbar navbar-expand-md navbar-light">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mt-2">
+            </ul>
+            <ul class="navbar-nav ms-auto mt-2">
+                <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary"><img class="iconImg"
+                        src="/static/img/voltar.png" /> Voltar </button>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block main %}
+<form action="/listDespesas" method="post">
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2" style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">Ações</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for despesa in dados %}
+                <tr>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" onclick="handleDelete({{ despesa.id}})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" onclick="handleEdit({{ despesa.id }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td>{{ despesa.data }}</td>
+                    <td>{{ despesa.tipo }}</td>
+                    <td> {{ despesa.descricao }}</td>
+                    <td>{{ despesa.categoria }}</td>
+                    <td>R$ {{ despesa.valor }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="qoute_tfoot_td" style="font-size: 2rem;">Total</th>
+                    <td>$10,000.00</td>
+                </tr>
+            </tfoot>
+        </table>
+</form>
+</div>
+{% endblock %}

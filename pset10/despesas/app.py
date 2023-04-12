@@ -1,7 +1,9 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+
+from flask import Flask, flash, jsonify, json, redirect, render_template, request, session
+
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -25,7 +27,6 @@ Session(app)
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///DespesasPessoaisDB.db")
-
 
 @app.after_request
 def after_request(response):
@@ -136,14 +137,31 @@ def tipoCategoria():
 def despesas():
     return render_template("despesas.html")
 
+@app.route("/despsasList", methods=["GET", "POST"])
+@login_required
+def despsasList():
+    
+        sql =   "Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, d.data, d.descricao, d.valor  From Despesa d Inner Join Categoria c on d.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where d.idUsuario = ?;"
+        print(sql)
+        dados = db.execute(sql, session["user_id"])
+        print(dados)
+        
+        return render_template("despsasList.html", dados=dados)
+
 @app.route("/receitas", methods=["GET", "POST"])
 @login_required
 def receitas():
     return render_template("receitas.html")
 
+@app.route("/receitasList", methods=["GET", "POST"])
+@login_required
+def receitasList():
+    return render_template("receitasList.html")
+
 @app.route("/lancamentos", methods=["GET", "POST"])
 @login_required
 def lancamentos():
-    return render_template("lancamentos.html")
 
+    dados = db.execute("Select * from lancamentos where idUsuario = ? ;", session["user_id"])
+    return render_template('lancamentos.html', dados=dados)
 

@@ -3,7 +3,57 @@
 {% block title %}
     Lançamentos
 {% endblock %}
+'
+{% block header %}
+<script type="text/javascript" src="/static/js/lancamentos.js"></script>
+{% endblock %}
 
 {% block main %}
 
+<form action="/lancamentos" method="post">
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2"
+                        style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">
+                        Ações</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+                {%  for lancamento in dados  %}
+                <tr>
+
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleDelete({{ lancamento.id }}, {{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button"
+                            onclick="handleEdit({{ lancamento.id }}, {{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                    <td>{{ lancamento.data }}</td>
+                    <td>{{ lancamento.tipo }}</td>
+                    <td> {{ lancamento.descricao }}</td>
+                    <td>{{ lancamento.categoria }}</td>
+                    <td>R$ {{ lancamento.valor }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th class="qoute_tfoot_td" style="font-size: 2rem;">Total</th>
+                    <td>R$ {{ total }}</td>
+            </tr>
+            </tfoot>
+        </table>
+</form>
+</div>
 {% endblock %}
