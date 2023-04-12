@@ -149,8 +149,12 @@ def despsasList():
     sql =   "Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, strftime('%d/%m/%Y %H:%M:%S', d.data) as data, d.descricao, strftime('%d/%m/%Y %H:%M:%S', d.dataVencimento) as dataVencimento, d.valor  From Despesa d Inner Join Categoria c on d.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where d.idUsuario = ?;"
 
     dados = db.execute(sql, session["user_id"])
-        
-    return render_template("despsasList.html", dados=dados)
+    
+    total = db.execute("Select sum(valor)as total from Despesa where idUsuario = ?;", session["user_id"])
+    total = total[0]
+    total = round(total['total'], 2 )
+
+    return render_template("despsasList.html", dados=dados, total=total)
 
 @app.route("/receitas", methods=["GET", "POST"])
 @login_required
@@ -164,7 +168,12 @@ def receitasList():
 
     dados = db.execute(sql, session["user_id"])
 
-    return render_template("receitasList.html", dados=dados )
+
+    total = db.execute("Select sum(valor)as total from Receita where idUsuario = ?;", session["user_id"])
+    total = total[0]
+    total = round(total['total'], 2 )
+
+    return render_template("receitasList.html", dados=dados, total=total )
 
 @app.route("/lancamentos", methods=["GET", "POST"])
 @login_required
@@ -174,5 +183,5 @@ def lancamentos():
 
     total = db.execute("Select sum(valor)as total from lancamentos where idUsuario = ? ;", session["user_id"])
     total = total[0]
-    total = round(total['total'], 3 )
+    total = round(total['total'], 2 )
     return render_template('lancamentos.html', dados=dados, total=total)
