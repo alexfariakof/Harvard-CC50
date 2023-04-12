@@ -146,7 +146,7 @@ def despesas():
 @login_required
 def despsasList():
     
-    sql =   "Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, d.data, d.descricao, d.dataVencimento, d.valor  From Despesa d Inner Join Categoria c on d.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where d.idUsuario = ?;"
+    sql =   "Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, strftime('%d/%m/%Y %H:%M:%S', d.data) as data, d.descricao, strftime('%d/%m/%Y %H:%M:%S', d.dataVencimento) as dataVencimento, d.valor  From Despesa d Inner Join Categoria c on d.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where d.idUsuario = ?;"
 
     dados = db.execute(sql, session["user_id"])
         
@@ -160,7 +160,7 @@ def receitas():
 @app.route("/receitasList", methods=["GET", "POST"])
 @login_required
 def receitasList():
-    sql =   "Select r.id, r.idUsuario, r.descricao as categoria, tc.descricao as tipo, r.data, r.descricao, r.valor  From Receita r Inner Join Categoria c on r.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where r.idUsuario = ?;"
+    sql =   "Select r.id, r.idUsuario, r.descricao as categoria, tc.descricao as tipo, strftime('%d/%m/%Y %H:%M:%S', r.data) as data, r.descricao, r.valor  From Receita r Inner Join Categoria c on r.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where r.idUsuario = ?;"
 
     dados = db.execute(sql, session["user_id"])
 
@@ -170,7 +170,7 @@ def receitasList():
 @login_required
 def lancamentos():
 
-    dados = db.execute("Select * from lancamentos where idUsuario = ? ;", session["user_id"])
+    dados = db.execute("Select *, strftime('%d/%m/%Y %H:%M:%S', data) as fData from lancamentos where idUsuario = ? ;", session["user_id"])
 
     total = db.execute("Select sum(valor)as total from lancamentos where idUsuario = ? ;", session["user_id"])
     total = total[0]

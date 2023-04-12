@@ -12,3 +12,6 @@ CREATE  TABLE Despesa (
     From Despesa d
      Inner Join Categoria c on d.idCategoria = c.id
      Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id;
+
+
+Select strftime('%d/%m/%Y %H:%M:%S', data) as data from Despesa;

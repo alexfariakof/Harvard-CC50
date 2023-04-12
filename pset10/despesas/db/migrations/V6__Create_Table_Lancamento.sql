@@ -13,3 +13,4 @@
   consolidado BOOLEAN DEFAULT FALSE);
 
 -- drop table Lancamento;
+
