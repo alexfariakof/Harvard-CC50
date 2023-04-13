@@ -30,11 +30,11 @@ nav .navbar-brand .green
     text-align: center;
     width: 100%;
 }
-
+    
 .header {
     background-color: #4481fc;
     color: #fff;
-    margin-bottom: 2rem;
+    margin-bottom: 0.2rem;
     padding: 0rem 0.5rem;
     text-align: center;
 }
@@ -46,9 +46,7 @@ nav .navbar-brand .green
     padding-top: 0.2rem;
     text-align: left;
     width: 100%;
-align-items: center;
-
-;
+    align-items: center;
 }
 
 .formSection{

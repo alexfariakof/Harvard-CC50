@@ -67,3 +67,4 @@ CREATE  TABLE _teste2 (
 
 
 SELECT lower(hex(randomblob(16)));
+
