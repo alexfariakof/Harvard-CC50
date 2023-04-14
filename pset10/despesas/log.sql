@@ -68,3 +68,12 @@ CREATE  TABLE _teste2 (
 
 SELECT lower(hex(randomblob(16)));
 
+
+Select c.id, tc.id as idCategoria,  tc.descricao as tipo, c.descricao From Categoria c Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id where c.idUsuario = 1;
+
+
+UPDATE Categoria SET idTipoCategoria = ?,  descricao = ? VALUE (1,'Transporte Alterado' ) Where idUsuario = 1 and id = 17;
+
+UPDATE Categoria SET idTipoCategoria = ?,  descricao = ? Where idUsuario = ? and id = ?;
+
+Delete  from Categoria where idUsuario = 1 and id = 17;

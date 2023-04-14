@@ -124,48 +124,88 @@ def logout():
 @app.route("/categorias", methods=["GET", "POST"])
 @login_required
 def categorias():
-    idCategoria =  request.form.get("idCategoria")        
-    if request.method == "POST" and idCategoria != '0':    
-        try:
-            sql = "Select c.id, tc.descricao as tipo, c.descricao From Categoria c Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id where c.idUsuario = ? and c.id = ?;"    
-            dados = db.execute(sql, session["user_id"], idCategoria)      
-            print(dados)  
-            return render_template("categorias.html", dados= dados)
-        except:
-            return 'bad request!', 400    
-    return render_template("categorias.html")
+    dados = [{'id': '0', 'idTipoCategoria': 0, 'descricao': ''}]
+    if request.method == "POST":        
+        idCategoria =  request.form.get("idCategoria")
+        if idCategoria != '0':            
+            try:
+                sql = "Select c.id, tc.id as idTipoCategoria, tc.descricao as tipo, c.descricao From Categoria c Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id where c.idUsuario = ? and c.id = ?;"
+                dados = db.execute(sql, session["user_id"], idCategoria)
+                return render_template("categorias.html", dados=dados)
+            except Exception as inst:
+                print(type(inst))    # the exception type
+                print(inst.args)     # arguments stored in .args
+                print(inst)          # __str__ allows args to be printed directly,
+                return 'bad request!', 400
+        else:
+            print(dados)
+            return render_template("categorias.html", dados=dados)
+    return render_template("categorias.html", dados=dados)
+
 @app.route("/categoriaIncluir", methods=["GET", "POST"])
 @login_required
-def categoriaIncluir():    
-    tipoCategoria =  request.form.get("tipoCategoria")
+def categoriaIncluir():
+    idTipoCategoria =  request.form.get("idTipoCategoria")
     descricao = request.form.get("descricao")
-    
+
     try:
-        sql = "INSERT INTO Categoria (idUsuario, idTipoCategoria , descricao) VALUES  (?, ?, ? );" 
-        db.execute(sql,  session["user_id"], tipoCategoria, descricao);
-        return render_template("categorias.html" )
-    except:
-        return 'bad request!', 400
+        sql = "INSERT INTO Categoria (idUsuario, idTipoCategoria , descricao) VALUES  (?, ?, ? );"
+        db.execute(sql,  session["user_id"], idTipoCategoria, descricao);
+        jsonResponse = {"status":"200"}
+        return jsonResponse    
+ 
+    except Exception as inst:
+                print(type(inst))    # the exception type
+                print(inst.args)     # arguments stored in .args
+                print(inst)          # __str__ allows args to be printed directly,
+                return {"Error":inst, "status": "400"}
 
 @app.route("/categoriaAlterar", methods=["GET", "POST"])
 @login_required
-def categoriaAlterar():    
-    tipoCategoria =  request.form.get("tipoCategoria")
-    descicao = request.form.get("descricao")
-    
+def categoriaAlterar():
+    idUsuario = session["user_id"]
+    idCategoria =  request.form.get("idCategoria")
+    idTipoCategoria =  request.form.get("idTipoCategoria")
+    descricao = request.form.get("descricao")
+ 
     try:
-        sql = "UPDATE Categoria SET (idTipoCategoria , descricao) VALUES (?,?) Where idUsuario = ?" 
-        db.execute(sql, tipoCategoria, descicao,  session["user_id"]);
-        return render_template("categorias.html")
-    except:
-        return 'bad request!', 400
+        sql = "UPDATE Categoria SET idTipoCategoria = ?,  descricao = ? Where idUsuario = ? and id = ?;"
+        db.execute(sql, int(idTipoCategoria), descricao, idUsuario , idCategoria );        
+        
+        jsonResponse = {"idCategoria": idCategoria, "idTipoCategoria": idTipoCategoria, "descricao": descricao}
+        jsonResponse = {"data": jsonResponse, "status":"200"  }        
+        return jsonResponse    
+    except Exception as inst:
+                print(type(inst))    # the exception type
+                print(inst.args)     # arguments stored in .args
+                print(inst)          # __str__ allows args to be printed directly,
+                return {"Error":inst, "status": "400"}
+
+@app.route("/categoriaDelete", methods=["GET", "POST"])
+@login_required
+def categoriaDelete():
+    idCategoria =  request.form.get("idCategoria")
+    try:
+        idCategoria =  request.form.get("idCategoria")
+        print(idCategoria)
+        sql = "Delete  from Categoria where idUsuario = ? and id = ?;"
+        db.execute(sql, session["user_id"], idCategoria)    
+        jsonResponse = {"status":"200", "idCategoria": idCategoria}
+        return jsonResponse    
+    except Exception as inst:
+                print(type(inst))    # the exception type
+                print(inst.args)     # arguments stored in .args
+                print(inst)          # __str__ allows args to be printed directly,
+                return {"Error":inst, "status": "400"}
 
 @app.route("/categoriaList", methods=["GET", "POST"])
 @login_required
 def categoriaList():
-    sql = "Select c.id, tc.descricao as tipo, c.descricao From Categoria c Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id where c.idUsuario = ?;"    
-    dados = db.execute(sql, session["user_id"])            
-    return render_template("categoriaList.html", dados=dados)
+        sql = "Select c.id, tc.descricao as tipo, c.descricao From Categoria c Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id where c.idUsuario = ?;"
+        dados = db.execute(sql, session["user_id"])    
+        return render_template("categoriaList.html", dados=dados)
+
+
 
 @app.route("/tipoCategoria", methods=["GET", "POST"])
 @login_required
@@ -177,19 +217,19 @@ def tipoCategoria():
 def despesas():
     return render_template("despesas.html")
 
-@app.route("/despsasList", methods=["GET", "POST"])
+@app.route("/despesasList", methods=["GET", "POST"])
 @login_required
-def despsasList():
-    
+def despesasList():
+
     sql =   "Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, strftime('%d/%m/%Y %H:%M:%S', d.data) as data, d.descricao, strftime('%d/%m/%Y %H:%M:%S', d.dataVencimento) as dataVencimento, d.valor  From Despesa d Inner Join Categoria c on d.idCategoria = c.id  Inner Join TipoCategoria tc on c.idTipoCategoria = tc.id  where d.idUsuario = ?;"
 
     dados = db.execute(sql, session["user_id"])
-    
+
     total = db.execute("Select sum(valor)as total from Despesa where idUsuario = ?;", session["user_id"])
     total = total[0]
     total = round(total['total'], 2 )
 
-    return render_template("despsasList.html", dados=dados, total=total)
+    return render_template("despesasList.html", dados=dados, total=total)
 
 @app.route("/receitas", methods=["GET", "POST"])
 @login_required

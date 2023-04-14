@@ -14,7 +14,7 @@ var handleNewDespesa = function() {
 
 var handleListDespesa = function(){
     var doc = document.querySelector('form');
-    doc.action = "/despsasList";
+    doc.action = "/despesasList";
     doc.submit();
 }
 

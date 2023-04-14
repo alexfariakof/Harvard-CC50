@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 
+
 {% block title %}
 Categorias
 {% endblock %}
 {% block header %}
+<script type="text/javascript" src="/static/js/categorias.js"></script>
 <nav class="bg-light border navbar navbar-expand-md navbar-light">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbar">
@@ -29,27 +31,26 @@ Categorias
 </nav>
 {% endblock %}
 
-{% block alert%}
-<script type="text/javascript" src="/static/js/categorias.js"></script>
-<div id="liveAlertPlaceholder"></div>
-{% endblock %}
-
-
 {% block main %}
+<div id="liveAlertPlaceholder"></div>
 <div class="section">
-    <form action="/" method="post">
+    <form  >
+        {%for dado in dados %}
+        <input type="hidden" id="idCategoria" name="idCategoria" value="{{ dado.id }}">
         <div class="mb-3">
             <label for="tipoCategoria" class="form-label">Tipo de Categoria</label>
             <select id="tipoCategoria" name="tipoCategoria" class="custom-select">
-                <option value="0">Nenhum Tipo de Categoria Selecionada</option>
-                <option value="1">Despesas</option>
-                <option value="2">Receitas</option>
+                <option value="0" {% if dado.idTipoCategoria == 0 %} selected="selected"{% endif %} >Nenhum Tipo de Categoria Selecionada</option>
+                <option value="1" {% if dado.idTipoCategoria == 1 %} selected="selected"{% endif %} >Despesas</option>
+                <option value="2" {% if dado.idTipoCategoria == 2 %} selected="selected"{% endif %} >Receitas</option>
             </select>
+            
         </div>
         <div class="mb-3">
-            <label for="descricao">Descricao</label>
-            <input id="descricao" name="descricao" autocomplete="off" autofocus placeholder="Descrição" type="text"    required />
+            <label for="deccscricao">Descricao</label>
+            <input value="{{ dado.descricao }}" id="descricao" name="descricao" autocomplete="off" autofocus placeholder="Descrição" type="text"    required />            
         </div>
+        {% endfor%}
     </form>
 </div>
 

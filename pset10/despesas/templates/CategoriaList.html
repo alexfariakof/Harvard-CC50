@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block header %}
-<script type="text/javascript" src="/static/js/categorias.js"></script>
 <nav class="bg-light border navbar navbar-expand-md navbar-light">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbar">
@@ -19,9 +18,14 @@
     </div>
 </nav>
 {% endblock %}
+{% block alert%}
+    <script type="text/javascript" src="/static/js/categorias.js"></script>
+{% endblock%}
 
 {% block main %}
-<form action="/list" method="post">
+<div id="liveAlertPlaceholder"></div>
+<form >
+    <input type="hidden" id="idCategoria" name="idCategoria" value="0">
     <div class="section">
         <table>
             <thead>
@@ -35,9 +39,12 @@
             </thead>
             <tbody>
                 {% for categoria in dados %}
-                <tr>
+                <tr  id="tr_{{ categoria.id }}" >
                     <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top"  title="Deletar Categoria"
-                        onclick="handleDelete({{ categoria.id }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                         onclick="handleDelete({{ categoria.id }})">
+                        
+
+                        <img class="iconImg" src="/static/img/delete.png" /> </button></td>
                     <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top"  title="Editar Categoria"
                         onclick="handleEdit({{ categoria.id }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
                         </td>
@@ -46,7 +53,8 @@
                 </tr>
                 {% endfor %}
         </table>
+    </div>
 </form>
-</div>
+
 
 {% endblock %}

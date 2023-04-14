@@ -6,21 +6,28 @@
         <meta name="viewport" content="initial-scale=1, width=device-width">
 
         <!-- http://getbootstrap.com/docs/5.1/ -->
-        <script  crossorigin="anonymous" src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="></script>
+        <script  crossorigin="anonymous" src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=">
+        </script>
         <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
         <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
 
-        
+
         <!-- https://favicon.io/emoji-favicons/money-bag/ -->
         <link href="/static/favicon.ico" rel="icon">
 
         <link href="/static/styles.css" rel="stylesheet">
         <title>{% block title %}{% endblock %}</title>        
+        
     </head>
 
     <body>
+        <div class="modal loading" style=" display:none;"> 
+            <div  class="imgLoading">
+                <img class="spinner-border"src="/static/img/loading.png"  />
+            </div>
+        </div>
 
-        <nav class="bg-light border navbar navbar-expand-md navbar-light">
+       <nav class="bg-light border navbar navbar-expand-md navbar-light">
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="/"> <span class="red">DESPESA$ PESSOAI$</span></a>
@@ -58,12 +65,17 @@
 
         {% block header %}{% endblock %}
         {% block alert%}{% endblock%}
+        
         <main class="container-fluid py-1 text-center">
-            {% block main %}{% endblock %}
+            {% block main %}
+            
+            
+            {% endblock %}
         </main>
 
         <footer class="mb-3 small text-center text-muted">
             © 2023 Honey TI. Todos os direitos reservados - Desenvolvido por Alex Ribeiro de Faria
         </footer>
+
     </body>
 </html>

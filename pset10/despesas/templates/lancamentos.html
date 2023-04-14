@@ -8,9 +8,8 @@
 <script type="text/javascript" src="/static/js/lancamentos.js"></script>
 <nav class="bg-light border navbar navbar-expand-md navbar-light">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbar">
-            <input type="number" id="mes" name="mes" min="1" max="12" autocomplete="off" autofocus  placeholder="Mês" style="width:4%;height:2.5rem;vertical-align:bottom;margin-left: 0.5rem;Text-align:center;margin-top:0.4rem;"  />
-            <input type="number" id="ano" name="ano" min="2018" max="2050" autocomplete="off" autofocus  placeholder="Ano" style="width:5%;height:2.5rem;vertical-align:bottom;margin-left: 0.5rem;Text-align:center;margin-top:0.4rem;" />
+        <div class="collapse navbar-collapse"  id="navbar">
+            <input type='month' value='2018-01 min="2018-01" max="2050-12"'autocomplete="off" autofocus class='input-container' >
             <ul class="navbar-nav me-auto mt-2">
                 <button id="btnPesquisar" onclick="handlePesquisar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Pesquisar lançamentos por mês e ano"
                     class="btn btn-primary btnBarraFerramenta"><img class="iconImg" src="/static/img/lupa.png" />
@@ -18,7 +17,7 @@
             </ul>
             <button id="btnConsolidar" onclick="handleConcolidar()" class="btn btn-primary btnBarraFerramenta" data-bs-toggle="tooltip" data-bs-placement="top" title="Após a consolidação não será possivél alterar recitas ou despesas." >
              <img class="iconImg" src="/static/img/consolidar.png" /> Consolidar</button>
-             
+
             </ul>
         </div>
     </div>
@@ -58,7 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-             
+
                 {%  for lancamento in dados  %}
                 <tr>
                     <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar {{ lancamento.tipo }}"

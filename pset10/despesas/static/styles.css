@@ -1,7 +1,7 @@
 /* Size for brand */
 nav .navbar-brand
 {
-    font-size: xx-large;    
+    font-size: xx-large;
 }
 
 /* Colors for brand */
@@ -30,7 +30,7 @@ nav .navbar-brand .green
     text-align: center;
     width: 100%;
 }
-    
+
 .header {
     background-color: #4481fc;
     color: #fff;
@@ -161,3 +161,63 @@ input[type="text"]:hover, input[type="number"]:hover {
     background-color: #f5f5f5;
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
+
+.loading {
+    background-color:#0d6efd;
+    color:white;
+    background-size: cover;
+    opacity: 0.3;
+    z-index: 998;
+
+}
+
+.imgLoading {
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    z-index: 999;
+}
+
+
+input[type="month"] {
+    position: relative;
+    width:auto;
+    height:2.5rem;
+    vertical-align:bottom;
+    margin-left: 0.5rem;
+    Text-align:center;
+    margin-top:0.4rem;
+}
+
+input[type="month"]:after {
+    content: "\25BC";
+    color: #555;
+    padding: 0 5px;
+}
+
+
+input[type="month"]:hover:after {
+    color: #bf1400;
+}
+input[type="month"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+}
+
+
+input[type="month"]::-webkit-inner-spin-button {
+    z-index: 1;
+}
+
+
+ input[type="month"]::-webkit-clear-button {
+     z-index: 1;
+ }
