@@ -10,10 +10,6 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mt-2">
             </ul>
-            <ul class="navbar-nav ms-auto mt-2">
-                <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary"><img class="iconImg"
-                        src="/static/img/voltar.png" /> Voltar </button>
-            </ul>
         </div>
     </div>
 </nav>
@@ -27,7 +23,7 @@
 <form >
     <input type="hidden" id="idCategoria" name="idCategoria" value="0">
     <div class="section">
-        <table>
+        <table id="tableCategoria">
             <thead>
                 <tr>
                     <th colspan="2"
@@ -55,6 +51,13 @@
         </table>
     </div>
 </form>
+{% endblock %}
 
-
+{% block barraFerramenta%}
+    <ul></ul>
+    <ul >
+        <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary">
+            <img class="iconImg" src="/static/img/voltar.png" /> Voltar
+         </button>
+    </ul>
 {% endblock %}

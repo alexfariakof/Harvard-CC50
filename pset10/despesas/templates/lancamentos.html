@@ -5,46 +5,37 @@
 {% endblock %}
 '
 {% block header %}
-<script type="text/javascript" src="/static/js/lancamentos.js"></script>
-<nav class="bg-light border navbar navbar-expand-md navbar-light">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse"  id="navbar">
-            <input type='month' value='2018-01 min="2018-01" max="2050-12"'autocomplete="off" autofocus class='input-container' >
-            <ul class="navbar-nav me-auto mt-2">
-                <button id="btnPesquisar" onclick="handlePesquisar()" data-bs-toggle="tooltip" data-bs-placement="top" title="Pesquisar lançamentos por mês e ano"
-                    class="btn btn-primary btnBarraFerramenta"><img class="iconImg" src="/static/img/lupa.png" />
-                     Pesquisar</button>
+    <script type="text/javascript" src="/static/js/lancamentos.js"></script>
+    <div class="container-fluid " >
+        <nav class="navbar navbar-light bg-light  align-items-end"  >
+            <ul></ul>
+            <ul>
+                <table class="align-content-center">
+                    <tr>
+                        <td colspan="6"></td>
+                        {% if total < 0 %}
+                            <th class="qoute_tfoot_td" style="font-size: 2rem;color:red;">Saldo</th>
+                            <td style="font-size: 1rem;color:red;">R$ {{ total }}</td>
+                        {% else %}
+                            <th class="qoute_tfoot_td" style="font-size: 2rem;color:green;">Saldo</th>
+                            <td style="font-size: 1rem;color:green;">R$ {{ total }}</td>
+                        {% endif%}
+                    </tr>
+                </table>
             </ul>
-            <button id="btnConsolidar" onclick="handleConcolidar()" class="btn btn-primary btnBarraFerramenta" data-bs-toggle="tooltip" data-bs-placement="top" title="Após a consolidação não será possivél alterar recitas ou despesas." >
-             <img class="iconImg" src="/static/img/consolidar.png" /> Consolidar</button>
-
-            </ul>
-        </div>
+        </nav>
     </div>
-</nav>
 
-{% endblock %}
+    {% endblock %}
 
 {% block main %}
 
 <form action="/lancamentos" method="post">
+    <input type="hidden" id="idDespesa" name="idDespesa" value="0">
+    <input type="hidden" id="idReceita" name="idReceita" value="0">
     <div class="section">
-        <table>
+        <table id="tableLancamentos" >
             <thead>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    {% if total < 0 %}
-                        <th class="qoute_tfoot_td" style="font-size: 2rem;color:red;">Saldo</th>
-                        <td style="font-size: 1rem;color:red;">R$ {{ total }}</td>
-                    {% else %}
-                        <th class="qoute_tfoot_td" style="font-size: 2rem;color:green;">Saldo</th>
-                        <td style="font-size: 1rem;color:green;">R$ {{ total }}</td>
-                    {% endif%}
-                </tr>
                 <tr>
                     <th colspan="2"
                         style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">
@@ -61,9 +52,9 @@
                 {%  for lancamento in dados  %}
                 <tr>
                     <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar {{ lancamento.tipo }}"
-                            onclick="handleDelete({{ lancamento.id }}, {{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                            onclick="handleDelete({{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
                     <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar {{ lancamento.tipo }}"
-                            onclick="handleEdit({{ lancamento.id }}, {{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                            onclick="handleEdit({{ lancamento.idDespesa }}, {{ lancamento.idReceita }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
                     <td>{{ lancamento.fData }}</td>
                     <td>{{ lancamento.tipo }}</td>
                     <td> {{ lancamento.descricao }}</td>
@@ -75,4 +66,12 @@
         </table>
 </form>
 </div>
+{% endblock %}
+{% block barraFerramenta%}
+    <ul></ul>
+    <ul >
+        <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary">
+            <img class="iconImg" src="/static/img/voltar.png" /> Voltar
+         </button>
+    </ul>
 {% endblock %}

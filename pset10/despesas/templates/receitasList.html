@@ -5,25 +5,15 @@
 {% endblock %}
 
 {% block header %}
-<script type="text/javascript" src="/static/js/recietas.js"></script>
-<nav class="bg-light border navbar navbar-expand-md navbar-light">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav me-auto mt-2">
-            </ul>
-            <ul class="navbar-nav ms-auto mt-2">
-                <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary"><img class="iconImg"
-                        src="/static/img/voltar.png" /> Voltar </button>
-            </ul>
-        </div>
-    </div>
-</nav>
+<script type="text/javascript" src="/static/js/receitas.js"></script>
 {% endblock %}
 
 {% block main %}
-<form action="/listReceitas" method="post">
+<div id="liveAlertPlaceholder"></div>
+<form action="/listReceitas" method="post"> 
+    <input type="hidden" id="idReceita" name="idReceita" value="0" >
     <div class="section">
-        <table>
+        <table id="tableReceita">
             <thead>
                 <tr>
                     <th colspan="2" style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">Ações</th>
@@ -49,14 +39,15 @@
                 </tr>
                 {% endfor %}
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan=5""></td>
-                    <th class="qoute_tfoot_td" style="font-size: 2rem;">Total</th>
-                    <td>R$ {{ total }}</td>
-                </tr>
-            </tfoot>
         </table>
 </form>
 </div>
+{% endblock %}
+{% block barraFerramenta%}
+    <ul></ul>
+    <ul >
+        <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary">
+            <img class="iconImg" src="/static/img/voltar.png" /> Voltar
+         </button>
+    </ul>
 {% endblock %}

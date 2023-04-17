@@ -1,11 +1,11 @@
-$(document).ready(function () {
+$(document).ready(function() {
     $('.currency-mask').maskMoney({
         prefix: "R$ ",
         decimal: ",",
         thousands: "."
-    });
+      });
 
-    $('#tableCategoria').DataTable({
+      $('#tableReceita').DataTable({
         "language": {
             "Search" : "Pesquisar",
             "lengthMenu": "Mostrando _MENU_ registros por página",
@@ -15,38 +15,41 @@ $(document).ready(function () {
             "infoFiltered": "(filtrado de _MAX_ registros no total)"
         }
     });
-});
+   
 
-var handleSaveCategoria = function (id) {
-    var _idCategoria = $('#idCategoria').val();
-    var _idTipoCategoria = $('#tipoCategoria').val();
-    var _descricao = $('#descricao').val();
 
-    if (_idTipoCategoria === '0' || typeof _idTipoCategoria == "undefined" || _idTipoCategoria === '') {
 
-        alertError('O campo tipo de categoria deve ser selecionado!');
+ });
+
+var handleSaveReceita = function (id) {
+    var _idReceita = $('#idReceita').val();
+    var _idCategoria = $('#idcategoria').val();
+    var _data  = $('#data').val();
+    var _descricao =  $('#descricao').val();
+        var _valor = $('#valor').val();
+
+
+    if (_idCategoria === '0' || typeof _idCategoria == "undefined" || _idCategoria === '') {
+
+        alertError('Uma categoria deve ser selecionada!');
         return false;
-
-    }
-    else if (_descricao === '' || _descricao === null || typeof _descricao == "undefined") {
-
-        alertError('O Campo descrição deve ser preenchido!')
-        return false;
     }
 
-    if (_idCategoria === '0') { // id  = 0 do inclusão
+    if (_idReceita === '0') { // id  = 0 do inclusão
         $.ajax({
-            url: "categoriaIncluir",
+            url: "receitaIncluir",
             type: 'post',
             data: {
-                idTipoCategoria: _idTipoCategoria,
-                descricao: _descricao
+                idCategoria : _idCategoria,
+                data : _data,
+                descricao : _descricao,                
+                valor: _valor
             },
             beforeSend: function () {
                 $('.modal').show();
             },
             complete: function (jqxhr, txt_status) {
-                setTimeout(function() { 
+                setTimeout(function() {
                     $('.modal').hide();
                 }, 2000);
             },
@@ -54,9 +57,9 @@ var handleSaveCategoria = function (id) {
             }
         })
             .done(function (response) {
-                handleNewCategoria();
+                handleNewReceita();
                 if (response.status === '200') {
-                    alertSuccess('Categoria registrada com sucesso!');
+                    alertSuccess('Receita registrada com sucesso!');
                 }
 
             })
@@ -66,34 +69,35 @@ var handleSaveCategoria = function (id) {
     }
     else {  // id != 0 do Alteração
         $.ajax({
-            url: "categoriaAlterar",
+            url: "receitaAlterar",
             type: 'post',
             data: {
-                idCategoria: _idCategoria,
-                idTipoCategoria: _idTipoCategoria,
-                descricao: _descricao,
-
+                idReceita : id,
+                idCategoria : _idCategoria,
+                data : _data,
+                descricao : _descricao,
+                valor: _valor
             },
             beforeSend: function () {
                 $('.modal').show();
             },
             complete: function (jqxhr, txt_status) {
-                setTimeout(function() { 
+                setTimeout(function() {
                     $('.modal').hide();
                 }, 2000);
 
             },
             success: function (response) {
                 if (response.status === '200') {
-                    alertSuccess('Categoria altualizada com sucesso!');
+                    alertSuccess('Receita altualizada com sucesso!');
                 }
             }
         })
             .done(function (response) {
-                $('#idCategoria').val(response.data.idCategoria);
-                $('#tipoCategoria').val(response.data.idTipoCategoria);
+                $('#idReceita').val(response.data.idReceita);
+                $('#tipoReceita').val(response.data.idTipoReceita);
                 $('#descricao').val(response.data.descricao);
-                $('#tipoCategoria').focus();
+                $('#tipoReceita').focus();
             })
             .fail(function (jqXHR, textStatus, msg) {
                 alertError(jqXHR);
@@ -101,58 +105,61 @@ var handleSaveCategoria = function (id) {
     }
 }
 
-var handleNewCategoria = function () {
+var handleNewReceita = function () {
     dismissAllALerts();
-    $('#idCategoria').val('0');
-    $('#tipoCategoria').val('0');
-    $('#descricao').val('');
-    $('#tipoCategoria').focus();
+    $('#idReceita').val(0);
+    $('#idcategoria').val(0);
+    $('#data').val(null);
+    $('#descricao').val(null);
+    $('#valor').val(null);
+    
+    $('#idcategoria').focus();
 }
 
-var handleListCategoria = function () {
-    var doc = document.querySelector('form');
-    doc.action = "/categoriaList";
+var handleListReceita = function () {
+    var doc =  document.querySelector('form');
+    doc.action = "/receitasList";
     doc.submit();
 }
 
 var handleEdit = function (id) {
     var doc = document.querySelector('form');
-    document.querySelector('#idCategoria').value = id;
-    doc.action = "/categorias";
+    document.querySelector('#idReceita').value = id;
+    doc.action = "/receitas";
     doc.method = "POST";
     doc.submit();
 }
 
 var handleDelete = function (id) {
 
-    if (!confirm('Tem certeza que deseja excluir essa categoria?'))
+    if (!confirm('Tem certeza que deseja excluir essa receita?'))
         return false;
     else {
         $.ajax({
-            url: "categoriaDelete",
+            url: "receitaDelete",
             type: 'post',
             data: {
-                idCategoria: id,
+                idReceita: id,
             },
             beforeSend: function () {
                 $('.modal').show();
             },
             complete: function (jqxhr, txt_status) {
-                setTimeout(function() { 
+                setTimeout(function() {
                     $('.modal').hide();
                 }, 2000);
             },
             success: function (response) {
                 if (response.status === '200') {
                     dismissAllALerts();
-                    alertSuccess('Categoria deletada com sucesso!');
+                    alertSuccess('Receita deletada com sucesso!');
                 }
             }
         })
             .done(function (response) {
-                $('#tr_' + response.idCategoria +'').remove()
+                $('#tr_' + response.idReceita +'').remove()
                 $(window).scrollTop(top);
-                
+
             })
             .fail(function (jqXHR, textStatus, msg) {
                 alertError(jqXHR);
@@ -170,7 +177,7 @@ function alertSuccess(message) {
         '<path path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>    </svg> ' +
         '<symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16"></symbol>  ' +
         '<div>' + message + ' </div>' +
-        '<button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"  style="right:0;"  ></button>' +
+        '<button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close"  style="right:0;"  ></button>' +
         '</svg>' +
         '</div>';
     alertPlaceholder.append(wrapper)
