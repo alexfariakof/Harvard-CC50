@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Lista de Despesas
+{% endblock %}
+
+{% block header %}
+<script type="text/javascript" src="/static/js/despesas.js"></script>
+<div id="navbarDisplay" class="navbarDisplay"   ></div>        
+<div class="container-fluid " >
+    <nav class="navbar navbar-light bg-light  align-items-end"  >
+        <ul class="titulo">Listagem de Despesas</ul>
+        <ul>
+            <table >
+                <tr>
+                    <td colspan="6"></td>
+                    {% if total < 0 %}
+                        <th class="qoute_tfoot_td" style="font-size: 1.5rem;color:red;">Saldo</th>
+                        <td style="font-size: 1rem;color:red;">R$ {{ total }}</td>
+                    {% else %}
+                        <th class="qoute_tfoot_td" style="font-size: 2rem;color:green;">Saldo</th>
+                        <td style="font-size: 1rem;color:green;">R$ {{ total }}</td>
+                    {% endif%}
+                </tr>
+            </table>
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}
+
+{% block main %}
+<div id="liveAlertPlaceholder"></div>
+<form action="/despesasList" method="post">
+    <input type="hidden" id="idDespesa" name="idDespesa" value="0" >
+    <div class="section">
+        <table id="tableDespesa">
+            <thead>
+                <tr>
+                    <th colspan="2" style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">Ações</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Data Vencimento</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for despesa in dados %}
+                <tr id="tr_{{ despesa.id }}">
+                    <td  style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar despesa"
+                        onclick="handleDelete({{ despesa.id }})"><img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar despesa"
+                        onclick="handleEdit({{ despesa.id }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
+                    <td>{{ despesa.data }}</td>
+                    <td>{{ despesa.tipo }}</td>
+                    <td> {{ despesa.descricao }}</td>
+                    <td>{{ despesa.categoria }}</td>
+                    <td>{{ despesa.dataVencimento }}</td>
+                    <td>R$ {{ despesa.valor }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</form>
+</div>
+{% endblock %}
+{% block barraFerramenta%}
+    <ul></ul>
+    <ul >
+        <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary">
+            <img class="iconImg" src="/static/img/voltar.png" /> Voltar
+         </button>
+    </ul>
+{% endblock %}
