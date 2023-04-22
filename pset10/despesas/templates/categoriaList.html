@@ -1,25 +1,25 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Lista de Categorias
+Lista de Categorias
 {% endblock %}
 
 {% block header %}
-<div id="navbarDisplay" class="navbarDisplay"   ></div>        
-<div class="container-fluid " >
-    <nav class="navbar navbar-light bg-light  align-items-end"  >
+<div id="navbarDisplay" class="navbarDisplay"></div>
+<div class="container-fluid ">
+    <nav class="navbar navbar-light bg-light  align-items-end">
         <ul class="titulo">Listagem de Categorias</ul>
         <ul>
-            <table >
+            <table>
                 <tr>
                     <td colspan="6"></td>
-                    {% if total < 0 %}
-                        <th class="qoute_tfoot_td" style="font-size: 1.5rem;color:red;">Saldo</th>
-                        <td style="font-size: 1rem;color:red;">R$ {{ total }}</td>
-                    {% else %}
-                        <th class="qoute_tfoot_td" style="font-size: 2rem;color:green;">Saldo</th>
-                        <td style="font-size: 1rem;color:green;">R$ {{ total }}</td>
-                    {% endif%}
+                    {% if saldo < 0 %}
+                    <th class="saldoRed">Saldo</th>
+                     <td  class="saldoRed">R$ {{ saldo }}</td>
+                     {% else %}
+                     <th class="saldoGreen">Saldo</th>
+                     <td class="saldoGreen">R$ {{ saldo }}</td>
+                     {% endif%}
                 </tr>
             </table>
         </ul>
@@ -27,12 +27,12 @@
 </div>
 {% endblock %}
 {% block alert%}
-    <script type="text/javascript" src="/static/js/categorias.js"></script>
+<script type="text/javascript" src="/static/js/categorias.js"></script>
 {% endblock%}
 
 {% block main %}
 <div id="liveAlertPlaceholder"></div>
-<form >
+<form>
     <input type="hidden" id="idCategoria" name="idCategoria" value="0">
     <div class="section">
         <table id="tableCategoria">
@@ -40,24 +40,27 @@
                 <tr>
                     <th colspan="2"
                         style="text-align: center;align-items: center;width:auto; padding:1px;rem;vertical-align:middle;">
-                        Ações</th>
+                        Ações
+                    </th>
                     <th>Tipo de Categoria</th>
                     <th>Descrição</th>
                 </tr>
             </thead>
             <tbody>
                 {% for categoria in dados %}
-                <tr  id="tr_{{ categoria.id }}" >
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top"  title="Deletar Categoria"
-                         onclick="handleDelete({{ categoria.id }})">
+                <tr id="tr_{{ categoria.id }}">
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Deletar Categoria" onclick="handleDelete(this, {{ categoria.id }})">
 
 
-                        <img class="iconImg" src="/static/img/delete.png" /> </button></td>
-                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip" data-bs-placement="top"  title="Editar Categoria"
-                        onclick="handleEdit({{ categoria.id }})"><img class="iconImg" src="/static/img/edit.png" /> </button></td>
-                        </td>
-                    <td>{{categoria.tipo  }}</td>
-                    <td>{{categoria.descricao  }}</td>
+                            <img class="iconImg" src="/static/img/delete.png" /> </button></td>
+                    <td style="width:6px;padding:0px;vertical-align: middle;"><button type="button" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Editar Categoria" onclick="handleEdit({{ categoria.id }})"><img
+                                class="iconImg" src="/static/img/edit.png" />
+                        </button></td>
+                    </td>
+                    <td>{{categoria.tipo }}</td>
+                    <td>{{categoria.descricao }}</td>
                 </tr>
                 {% endfor %}
         </table>
@@ -66,10 +69,15 @@
 {% endblock %}
 
 {% block barraFerramenta%}
-    <ul></ul>
-    <ul >
-        <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary">
-            <img class="iconImg" src="/static/img/voltar.png" /> Voltar
-         </button>
-    </ul>
+<ul>
+    <button id="btnNewCategoria" onclick="handleNewCategoria()" data-bs-toggle="tooltip" data-bs-placement="top"  title="Criar uma nova categoria"  class="btn btn-primary btnBarraFerramenta">
+        <img class="iconImg" src="/static/img/plus.png" /> Nova Categoria
+    </button>
+
+</ul>
+<ul>
+    <button id="btnVoltarCategoria" onclick="location.href = document.referrer;" class="btn btn-primary">
+        <img class="iconImg" src="/static/img/voltar.png" /> Voltar
+    </button>
+</ul>
 {% endblock %}

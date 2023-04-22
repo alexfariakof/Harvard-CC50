@@ -6,7 +6,8 @@
 '
 {% block header %}
     <script type="text/javascript" src="/static/js/lancamentos.js"></script>
-    <div id="navbarDisplay" class="navbarDisplay"   ></div>        
+
+    <div id="navbarDisplay" class="navbarDisplay"   ></div>
     <div class="container-fluid " >
         <nav class="navbar navbar-light bg-light  align-items-end"  >
             <ul class="titulo">Lançamentos</ul>
@@ -14,12 +15,12 @@
                 <table >
                     <tr>
                         <td colspan="6"></td>
-                        {% if total < 0 %}
-                            <th class="qoute_tfoot_td" style="font-size: 1.5rem;color:red;">Saldo</th>
-                            <td style="font-size: 1rem;color:red;">R$ {{ total }}</td>
+                        {% if saldo < 0 %}
+                         <th id="thSaldo" class="saldoRed">Saldo</th>
+                        <td id="tdSaldo" class="saldoRed">R$ {{ saldo }}</td>
                         {% else %}
-                            <th class="qoute_tfoot_td" style="font-size: 2rem;color:green;">Saldo</th>
-                            <td style="font-size: 1rem;color:green;">R$ {{ total }}</td>
+                        <th id="thSaldo" class="saldoGreen">Saldo</th>
+                        <td id="tdSaldo" class="saldoGreen">R$ {{ saldo }}</td>
                         {% endif%}
                     </tr>
                 </table>
@@ -29,7 +30,7 @@
 {% endblock %}
 
 {% block main %}
-
+<div id="liveAlertPlaceholder"></div>
 <form action="/lancamentos" method="post">
     <input type="hidden" id="idDespesa" name="idDespesa" value="0">
     <input type="hidden" id="idReceita" name="idReceita" value="0">
@@ -59,7 +60,7 @@
                     <td>{{ lancamento.tipo }}</td>
                     <td> {{ lancamento.descricao }}</td>
                     <td>{{ lancamento.categoria }}</td>
-                    <td>R$ {{ lancamento.valor }}</td>
+                    <td>{{ lancamento.valor }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -70,7 +71,7 @@
 {% block barraFerramenta%}
     <ul></ul>
     <ul >
-        <button id="btnVoltarCategoria" onclick="history.back()" class="btn btn-primary">
+        <button id="btnVoltarCategoria" onclick="location.href = document.referrer;" class="btn btn-primary">
             <img class="iconImg" src="/static/img/voltar.png" /> Voltar
          </button>
     </ul>

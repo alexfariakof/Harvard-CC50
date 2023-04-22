@@ -6,7 +6,13 @@ INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (2, 11, 
 INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (2, 12, '2022-10-12', 'Pagamento usuário 2', 1.88 );
 INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (2, 10, '2022-10-12', 'Pagamento usuário 2', 7.97 );
 INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (2, 8, '2022-10-12', 'Pagamento usuário 2', 44.7 );
-INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 8, '2022-10-12', 'Pagamento usuário 3', 988.68 );
-INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 9, '2022-10-12', 'Pagamento usuário 3', 85986.66 );
-INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 11, '2022-10-12', 'Pagamento usuário 3', 500044.87 );
-INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 12,'2022-10-12', 'Pagamento usuário 3', 855.7 );
+
+
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 8, '2022-10-12', 'Pagamento usuário 3', 98.38 );
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 9, '2022-10-12', 'Pagamento usuário 3', 86.66 );
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 11, '2022-10-12', 'Pagamento usuário 3', 544.87 );
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 12,'2022-10-12', 'Pagamento usuário 3', 8.7 );
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 8, '2022-10-12', 'Pagamento usuário 3', 9.68 );
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 9, '2022-10-12', 'Pagamento usuário 3', 6.66 );
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 11, '2022-10-12', 'Pagamento usuário 3', 54.87 );
+INSERT INTO Receita(idUsuario,idCategoria,data, descricao,valor) VALUES (3, 12,'2022-10-12', 'Pagamento usuário 3', 5.7 );

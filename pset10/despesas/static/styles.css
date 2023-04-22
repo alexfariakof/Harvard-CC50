@@ -5,14 +5,14 @@ body{
 
 /* Size for brand */
 
-.navbarDisplay { 
+.navbarDisplay {
     position: static;
     top: 0px;
     background-color: #0d6efd;
     width: 100%;
     height: 0.25rem;
 }
-    
+
 
 nav .navbar-brand
 {
@@ -65,7 +65,7 @@ nav .navbar-brand .green
 }
 
 .formSection{
-    align-items: flex-start;    
+    align-items: flex-start;
 }
 
 .section:hover {
@@ -75,7 +75,7 @@ nav .navbar-brand .green
 table {
     background-color: transparent;
     margin-bottom: 0.25rem;
-    width: 100%;    
+    width: 100%;
 }
 
 table th,
@@ -87,6 +87,19 @@ table td {
 tbody tr:nth-of-type(odd) {
     background-color: rgb(179, 208, 255, 0.3)
 }
+
+.dataTables_wrapper th {
+    padding: 0.75rem;
+    vertical-align: middle;
+    background-color: #a3c9ec;
+}
+
+.dataTables_wrapper tr:nth-of-type(odd) {
+    background-color: #d9edff;
+
+}
+
+
 
 button, input[type="submit"] {
     background-color: #d9edff;
@@ -298,10 +311,21 @@ input[type="date"]::-webkit-inner-spin-button {
 
  input[type="date"]::-webkit-clear-button {
      z-index: 1;
-     
+
  }
 
  .titulo{
     font-size: 1.5rem;
     color:#0d6efd;;
  }
+
+ .saldoRed{
+    font-size: 1.5rem;
+    color:red;
+ }
+
+ .saldoGreen{
+    font-size: 1.5rem;
+    color:green;
+ }
+

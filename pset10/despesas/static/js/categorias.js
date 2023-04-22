@@ -13,15 +13,14 @@ $(document).ready(function () {
         $("#navBrand").removeClass('collapse');
         setTimeout(function() {
             $("#navBrand").addClass('collapse')
-        }, 10000);
+        }, 20000);
 
     });
 
-    
-
-
-
     $('#tableCategoria').DataTable({
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, 'Todos'], ],
+        "pageLength": -1,
+        "paging": true,
         "language": {
             "search": "Pesquisar :",
             "lengthMenu": "Mostrando _MENU_ registros por página",
@@ -64,7 +63,7 @@ var handleSaveCategoria = function (id) {
             complete: function (jqxhr, txt_status) {
                 setTimeout(function() {
                     $('.modal').hide();
-                }, 2000);
+                }, 1000);
             },
             success: function (response) {
             }
@@ -96,7 +95,7 @@ var handleSaveCategoria = function (id) {
             complete: function (jqxhr, txt_status) {
                 setTimeout(function() {
                     $('.modal').hide();
-                }, 2000);
+                }, 1000);
 
             },
             success: function (response) {
@@ -118,11 +117,19 @@ var handleSaveCategoria = function (id) {
 }
 
 var handleNewCategoria = function () {
+    var doc = document.querySelector('form');
+    doc.method = "POST";
+    doc.action = "/categorias";
+    doc.submit();
+}
+
+var clearFormCategoria = function() {
     dismissAllALerts();
     $('#idCategoria').val('0');
     $('#tipoCategoria').val('0');
     $('#descricao').val('');
     $('#tipoCategoria').focus();
+
 }
 
 var handleListCategoria = function () {
@@ -140,7 +147,7 @@ var handleEdit = function (id) {
     doc.submit();
 }
 
-var handleDelete = function (id) {
+var handleDelete = function (element, id) {
 
     if (!confirm('Tem certeza que deseja excluir essa categoria?'))
         return false;
@@ -153,30 +160,51 @@ var handleDelete = function (id) {
             },
             beforeSend: function () {
                 $('.modal').show();
-            },
-            complete: function (jqxhr, txt_status) {
-                setTimeout(function() {
-                    $('.modal').hide();
-                }, 2000);
-            },
-            success: function (response) {
-                if (response.status === '200') {
-                    dismissAllALerts();
-                    alertSuccess('Categoria deletada com sucesso!');
-                }
-            }
-        })
-            .done(function (response) {
-                $('#tr_' + response.idCategoria +'').remove()
-                $(window).scrollTop(top);
 
-            })
-            .fail(function (jqXHR, textStatus, msg) {
-                alertError(jqXHR);
-            });
+            }
+        }).done(function (response) {
+            if (response.status === '200') {
+                dismissAllALerts();
+                $(element).parent().parent().remove();
+
+                setTimeout(function () {
+                    alertSuccess('Categoria deletada com sucesso!');
+                    $('.modal').hide();
+                    $(window).scrollTop(top);
+                }, 1000);
+            }
+            else if (response.status === '400') {
+                alert('Todo error 400');
+                $('.modal').hide();
+            }
+            else if (response.status === '403') {
+                alert('Todo error 403');
+                $('.modal').hide();
+            }
+
+            if (response.status === '403') {
+                setTimeout(function () {
+                    $(window).scrollTop(top);
+                    alertError(response.Error);
+                    $('.modal').hide();
+                }, 1000);
+            }
+        }).fail(function (jqXHR, textStatus, msg) {
+            alertError(jqXHR);
+        });
     }
 }
 
+var setClassSaldo  = function(saldo) {
+    if (saldo < 0) {
+        $("#thSaldo").removeClass("saldoGreen").addClass("saldoRed");
+        $("#tdSaldo").removeClass("saldoGreen").addClass("saldoRed");
+    }
+    else {
+        $("#thSaldo").removeClass("saldoRed").addClass("saldoGreen");
+        $("#tdSaldo").removeClass("saldoRed").addClass("saldoGreen");
+    }
+}
 
 function alertSuccess(message) {
     var alertPlaceholder = document.getElementById('liveAlertPlaceholder')

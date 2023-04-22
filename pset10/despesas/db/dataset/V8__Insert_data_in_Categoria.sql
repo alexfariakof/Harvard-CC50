@@ -10,6 +10,7 @@ INSERT INTO Categoria (idUsuario,idTipoCategoria ,descricao) VALUES  (1, 2, 'Pr√
 INSERT INTO Categoria (idUsuario,idTipoCategoria ,descricao) VALUES  (1, 2, 'Investimento' );
 INSERT INTO Categoria (idUsuario,idTipoCategoria ,descricao) VALUES  (1, 2, 'Benef√≠cio' );
 INSERT INTO Categoria (idUsuario,idTipoCategoria ,descricao) VALUES  (1, 2, 'Outro' );
+
 INSERT INTO Categoria (idUsuario,idTipoCategoria ,descricao) VALUES  (2, 1, 'Lazer Criado' );
 INSERT INTO Categoria (idUsuario,idTipoCategoria ,descricao) VALUES  (2, 1, 'Lazer 3 Criado ' );
 INSERT INTO Categoria (idUsuario,idTipoCategoria ,descricao) VALUES  (3, 2, 'Beneficio 2' );

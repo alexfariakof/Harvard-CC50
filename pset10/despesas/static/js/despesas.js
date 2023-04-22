@@ -6,23 +6,24 @@ $(document).ready(function () {
         thousands: "."
     });
 
-    setTimeout(function() {
+    setTimeout(function () {
         $("#navBrand").addClass('collapse')
     }, 5000);
-    
-    $('#navbarDisplay').on('mouseover' , function(){
+
+    $('#navbarDisplay').on('mouseover', function () {
         $("#navBrand").removeClass('collapse');
-        setTimeout(function() {
+        setTimeout(function () {
             $("#navBrand").addClass('collapse')
-        }, 10000);
+        }, 20000);
 
     });
 
-
-
     $('#tableDespesa').DataTable({
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, 'Todos'],],
+        "pageLength": -1,
+        "paging": true,
         "language": {
-            "search" : "Pesquisar :",
+            "search": "Pesquisar :",
             "lengthMenu": "Mostrando _MENU_ registros por página",
             "zeroRecords": "Nada encontrado",
             "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -52,7 +53,7 @@ var handleSaveDespesa = function (idDespesa) {
         return false;
     }
 
-    if (idDespesa === '0' || idDespesa === undefined )  { // id  = 0 do inclusão
+    if (idDespesa === '0' || idDespesa === undefined) { // id  = 0 do inclusão
         $.ajax({
             url: "despesaIncluir",
             type: 'post',
@@ -69,21 +70,19 @@ var handleSaveDespesa = function (idDespesa) {
             complete: function (jqxhr, txt_status) {
                 setTimeout(function () {
                     $('.modal').hide();
-                }, 2000);
+                }, 1000);
             },
             success: function (response) {
             }
-        })
-            .done(function (response) {
-                handleNewDespesa();
-                if (response.status === '200') {
-                    alertSuccess('Despesa registrada com sucesso!');
-                }
+        }).done(function (response) {
+            handleNewDespesa();
+            if (response.status === '200') {
+                alertSuccess('Despesa registrada com sucesso!');
+            }
 
-            })
-            .fail(function (jqXHR, textStatus, msg) {
-                alertError(msg);
-            });
+        }).fail(function (jqXHR, textStatus, msg) {
+            alertError(msg);
+        });
     }
     else {  // id != 0 do Alteração
         $.ajax({
@@ -103,7 +102,7 @@ var handleSaveDespesa = function (idDespesa) {
             complete: function (jqxhr, txt_status) {
                 setTimeout(function () {
                     $('.modal').hide();
-                }, 2000);
+                }, 1000);
 
             },
             success: function (response) {
@@ -111,27 +110,32 @@ var handleSaveDespesa = function (idDespesa) {
                     alertSuccess('Despesa altualizada com sucesso!');
                 }
             }
-        })
-            .done(function (response) {
-                $('#idDespesa').val(response.data.idDespesa);
-                $('#tipoDespesa').val(response.data.idTipoDespesa);
-                $('#descricao').val(response.data.descricao);
-                $('#tipoDespesa').focus();
-            })
-            .fail(function (jqXHR, textStatus, msg) {
-                alertError(jqXHR);
-            });
+        }).done(function (response) {
+            $('#idDespesa').val(response.data.idDespesa);
+            $('#tipoDespesa').val(response.data.idTipoDespesa);
+            $('#descricao').val(response.data.descricao);
+            $('#tipoDespesa').focus();
+        }).fail(function (jqXHR, textStatus, msg) {
+            alertError(jqXHR);
+        });
     }
 }
 
 var handleNewDespesa = function () {
+    var doc = document.querySelector('form');
+    doc.action = "/despesas";
+    doc.method = "POST";
+    doc.submit();
+}
+
+var clearFormDespesa = function () {
     dismissAllALerts();
     $('#idDespesa').val(0);
     $('#data').val(null);
     $('#descricao').val(null);
     $('#dataVencimento').val(null);
     $('#valor').val(null);
-    $('#categoria').val(0);
+    $('#idCategoria').val(0);
     $('#data').focus();
 }
 
@@ -149,7 +153,7 @@ var handleEdit = function (id) {
     doc.submit();
 }
 
-var handleDelete = function (id) {
+var handleDelete = function (element, id) {
 
     if (!confirm('Tem certeza que deseja excluir essa despesa?'))
         return false;
@@ -162,49 +166,54 @@ var handleDelete = function (id) {
             },
             beforeSend: function () {
                 $('.modal').show();
-            },
-            complete: function (jqxhr, txt_status) {
-                setTimeout(function () {
-                    $('.modal').hide();
-                }, 2000);
-            },
-            success: function (response) {
-                if (response.status === '200') {
-                    dismissAllALerts();
-                    alertSuccess('Despesa deletada com sucesso!');
-                }
-            }
-        })
-            .done(function (response) {
-                $('#tr_' + response.idDespesa + '').remove()
-                $(window).scrollTop(top);
 
-            })
-            .fail(function (jqXHR, textStatus, msg) {
-                alertError(jqXHR);
-            });
+            }
+        }).done(function (response) {
+            if (response.status === '200') {
+                dismissAllALerts();
+                $(element).parent().parent().remove();
+                $("#tdSaldo").text(response.saldo);
+                $("#tdTotal").text(response.total);
+                setClassSaldo(response.floatSsaldo);
+
+                setTimeout(function () {
+                    alertSuccess('Despesa deletada com sucesso!');
+                    $('.modal').hide();
+                    $(window).scrollTop(top);
+                }, 1000);
+            }
+            else if (response.status === '400') {
+                alert('Todo error 400');
+                $('.modal').hide();
+            }
+            else if (response.status === '403') {
+                alert('Todo error 403');
+                $('.modal').hide();
+            }
+
+            if (response.status === '403') {
+                setTimeout(function () {
+                    $(window).scrollTop(top);
+                    alertError(response.Error);
+                    $('.modal').hide();
+                }, 1000);
+            }
+        }).fail(function (jqXHR, textStatus, msg) {
+            alertError(jqXHR);
+        });
     }
 }
 
-var handlePesquisar = function () {
-    var doc = document.querySelector('form');
-    document.querySelector('#pesquisaMesAno').value = $('#mesANo').val();
-    doc.action = "/despesasList";
-    doc.method = "POST";
-    doc.submit();
-
-    $('form').submit(function (event) {
-        modal.show();
-        event.preventDefault();
-    });
-
-
+var setClassSaldo = function (saldo) {
+    if (saldo < 0) {
+        $("#thSaldo").removeClass("saldoGreen").addClass("saldoRed");
+        $("#tdSaldo").removeClass("saldoGreen").addClass("saldoRed");
+    }
+    else {
+        $("#thSaldo").removeClass("saldoRed").addClass("saldoGreen");
+        $("#tdSaldo").removeClass("saldoRed").addClass("saldoGreen");
+    }
 }
-
-var handleConcolidar = function () {
-    alert("Todo consillidar ")
-}
-
 
 function alertSuccess(message) {
     var alertPlaceholder = document.getElementById('liveAlertPlaceholder')

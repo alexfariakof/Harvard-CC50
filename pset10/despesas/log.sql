@@ -13,7 +13,7 @@ Select '' as id, lancamentos.*
  union
 
 
---Regra de negocios para população da dropdown list categorias de receitas 
+--Regra de negocios para população da dropdown list categorias de receitas
 
 Select id, descricao From Categoria where idUsuario = 1 and idTipoCategoria = 2
 
@@ -24,6 +24,14 @@ Select r.idUsuario, data, idCategoria, valor, 'Receitas' as Tipo, 0 as idDespesa
  Inner Join Categoria cr on r.idCategoria = cr.id
  where r.idUsuario = 1
    and data like '%2022-10%'
+
+
+
+
+select count(1) from despesa where idUsuario = 1;
+select (CASE (select count(1) from despesa where idUsuario = 1) WHEN '0' THEN 0 ELSE sum(valor) END) as valor  from despesa where idUsuario = 2;
+
+
 
 
 
@@ -119,7 +127,7 @@ Select d.id, d.idUsuario, c.descricao as categoria, tc.descricao as tipo, strfti
 Select strftime('%m', data) from despesa;
 
 
-Select  lancamentos.* 
+Select  lancamentos.*
                from (Select d.idUsuario, strftime('%d/%m/%Y', data) as fData,  idCategoria, valor*-1 as valor, 'Despesas' as tipo, d.id as idDespesa, 0 as idReceita, d.descricao, c.descricao as categoria
                        From Despesa d
                       Inner Join Categoria c on d.idCategoria = c.id
