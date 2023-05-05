@@ -1,0 +1,7 @@
+https://youtu.be/WDmW6LSnpIQ?t=537
+
+Digite no seu terminal
+ ssh-keygen
+
+cat ~/.ssh/id_rsa.pub
+
