@@ -1,6 +1,6 @@
-# Despesas Pessoaias
+# Despesas Pessoais desenvolvido com Python 3
 
-Video Demo no yutube:![ Desoesas Pessoais:](https://www.youtube.com/watch?v=LeIYKaxELHQ").
+Video Demo no yutube:![ Desoesas Pessoais:](https://youtu.be/LeIYKaxELHQ).
 
 <https://user-images.githubusercontent.com/42475620/233794968-e2418a1b-dd9f-4bb4-b73e-76956ba57359.mp4>
 
