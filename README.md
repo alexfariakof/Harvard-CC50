@@ -3,6 +3,10 @@
 
 
 
+https://github.com/alexfariakof/CS50/assets/42475620/0c987733-125a-476c-b25e-5265eeb2f560
+
+
+
 # Descrição
 Para o desenvolvimento desse trabalho foi realizada uma pesquisa direcionada à implementação que propõe a construção uma aplicação responsiva e iterativa aperfeiçoada de sistemas.
 Essa aplicação foi baseada nas tecnologias Pyhton, Flask, Jjinja, Javascript, Jquery, bootstrap5 e Sqlite3  como vabco de dados.
