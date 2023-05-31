@@ -6,6 +6,9 @@
 https://github.com/alexfariakof/CS50/assets/42475620/0c987733-125a-476c-b25e-5265eeb2f560
 
 
+# Acesso ao projeto atualizado
+ <a href="http://despesas-python.dmg4c8cnazhvhaep.eastus.azurecontainer.io:5000" target="_blank" >Despesas Pessoais</a>
+</h2>
 
 # Descrição
 Para o desenvolvimento desse trabalho foi realizada uma pesquisa direcionada à implementação que propõe a construção uma aplicação responsiva e iterativa aperfeiçoada de sistemas.
