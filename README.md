@@ -8,7 +8,7 @@ https://github.com/alexfariakof/CS50/assets/42475620/0c987733-125a-476c-b25e-526
 <h2>
 Acesso ao projeto
  <a href="http://ec2-44-204-154-69.compute-1.amazonaws.com:4000" target="_blank" >Despesas Pessoais</a>
-dockerizado e publicado no Azure.
+dockerizada e publicada na AWS
 </h2>
 
 # Descrição
