@@ -6,8 +6,8 @@
 https://github.com/alexfariakof/CS50/assets/42475620/0c987733-125a-476c-b25e-5265eeb2f560
 
 <h2>
-Acesso ao projeto atualizado
- <a href="http://despesas-python.dmg4c8cnazhvhaep.eastus.azurecontainer.io:5000" target="_blank" >Despesas Pessoais</a>
+Acesso ao projeto
+ <a href="http://ec2-44-204-154-69.compute-1.amazonaws.com:4000" target="_blank" >Despesas Pessoais</a>
 dockerizado e publicado no Azure.
 </h2>
 
