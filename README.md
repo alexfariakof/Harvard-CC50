@@ -160,7 +160,8 @@ muitas aplicações de software para armazenar e gerenciar dados. Ele é uma bib
 
 
     - receitas.html
-    ![tela_receitas](https://github.com/alexfariakof/CS50/assets/42475620/5654f918-9197-40bf-a25f-a8d58aa50e03)
+    ![tela_receitas](https://github.com/alexfariakof/CS50/assets/42475620/c2e9b225-1841-4bfc-bdbe-a6e75e561938)
+
 
     - receitasList.htmll
 
